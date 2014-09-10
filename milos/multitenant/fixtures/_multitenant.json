@@ -1,0 +1,54 @@
+[
+{
+    "pk": 1, 
+    "model": "multitenant.sitefolder", 
+    "fields": {
+        "path": "example", 
+        "site": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "multitenant.sitefolder", 
+    "fields": {
+        "path": "test", 
+        "site": 2
+    }
+},
+{
+    "pk": 1, 
+    "model": "multitenant.subdomain", 
+    "fields": {
+        "priority": 1, 
+        "display_name": "portalbeta", 
+        "site": 2, 
+        "name": "portalbeta"
+    }
+},
+{
+    "pk": 1, 
+    "model": "multitenant.domainredirect", 
+    "fields": {
+        "alternate": "dev-example.com", 
+        "site": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "multitenant.domainredirect", 
+    "fields": {
+        "alternate": "dev-test.com", 
+        "site": 2
+    }
+},
+{
+    "pk": 1, 
+    "model": "multitenant.devdomainredirect", 
+    "fields": {}
+},
+{
+    "pk": 2, 
+    "model": "multitenant.devdomainredirect", 
+    "fields": {}
+}
+]

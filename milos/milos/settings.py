@@ -1,0 +1,140 @@
+"""
+Django settings for milos project.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/dev/topics/settings/
+
+For the full list of settings and their values, see
+https://docs.djangoproject.com/en/dev/ref/settings/
+"""
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'q!9=^7s2kj#u($%6&9jwdr1%f&465i&&$ro$^&d9f15f(@f&3&'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+TEMPLATE_DEBUG = True
+
+ALLOWED_HOSTS = []
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+
+SRC_DIR = os.path.join(PROJECT_DIR, '_src')
+DIST_DIR = os.path.join(PROJECT_DIR, '_dist')
+BOWER_DIR = os.path.join(PROJECT_DIR, '_bower')
+
+
+# Application definition
+
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+	'django.contrib.flatpages',
+	'django.contrib.sites',
+	'django.contrib.redirects',
+)
+
+OUR_MODULES = (
+	'multitenant',
+)
+
+INSTALLED_APPS += OUR_MODULES
+
+
+
+
+
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
+    'multitenant.middleware.DynamicSitesMiddleware',
+    'django.middleware.common.CommonMiddleware',
+)
+
+TEMPLATE_DIRS = (
+    # The docs say it should be absolute path: PROJECT_PATH is precisely one.
+    #os.path.join(PROJECT_DIR, 'TEMPLATES'),
+)
+
+if DEBUG:
+    TEMPLATE_LOADERS = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )
+else:
+    TEMPLATE_LOADERS = (
+        ('django.template.loaders.cached.Loader', (
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        )),
+    )
+
+BOWER_DIR = os.path.join(PROJECT_DIR, '_bower')
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+	'multitenant.context_processors.current_site',
+    'django.contrib.auth.context_processors.auth',
+)
+
+
+ROOT_URLCONF = '_sites.test.urls'
+DEFAULT_HOST = 'test.com'
+SITES_DIR = os.path.join(BASE_DIR, '_sites')
+
+WSGI_APPLICATION = 'milos.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+# Internationalization
+# https://docs.djangoproject.com/en/dev/topics/i18n/
+
+
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+SITE_ID = 1
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+    )
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/dev/howto/static-files/
+
+STATIC_URL = '/static/'
